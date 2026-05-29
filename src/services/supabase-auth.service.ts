@@ -56,4 +56,21 @@ export class SupabaseAuthService {
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
+
+  async saveMatchHistory(rival: string, resultado: string, duracion_turnos: number) {
+    const user = this.getCurrentUser();
+    if (!user) return null;
+
+    const { data, error } = await this.supabase.from('match_history').insert({
+      user_id: user.id,
+      rival,
+      resultado,
+      duracion_turnos
+    });
+
+    if (error) {
+        console.error('Error guardando registro de batalla:', error);
+    }
+    return { data, error };
+  }
 }

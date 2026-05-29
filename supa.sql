@@ -46,3 +46,12 @@ UPDATE cards SET pre_evolution_name = 'Applin' WHERE name = 'Dipplin';
 UPDATE cards SET pre_evolution_name = 'Poltchageist' WHERE name = 'Sinistcha';
 UPDATE cards SET pre_evolution_name = 'Duraludon' WHERE name = 'Archaludon';
 UPDATE cards SET pre_evolution_name = 'Dipplin' WHERE name = 'Hydrapple';
+
+CREATE TABLE IF NOT EXISTS match_history (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+    fecha TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    rival TEXT NOT NULL,
+    resultado TEXT NOT NULL,
+    duracion_turnos INTEGER NOT NULL
+);

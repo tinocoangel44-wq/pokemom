@@ -776,6 +776,11 @@ export class App implements OnInit, OnDestroy {
       this.gameState.winner = this.opponent.id;
       log(`Te has rendido.`);
       this.gameState = { ...this.gameState };
+      this.saveMatchResult();
+    }
+
+    if (event.actionType === 'gameEndedFromNetwork') {
+      this.saveMatchResult();
     }
   }
 
@@ -804,7 +809,15 @@ export class App implements OnInit, OnDestroy {
       this.gameState = { ...this.gameState };
       this.cdr.detectChanges();
       this.audioService.lowerBattleVolume();
+      this.saveMatchResult();
     }
+  }
+
+  async saveMatchResult() {
+    const resultStr = this.gameState.winner === this.player.id ? 'Victoria' : 'Derrota';
+    const turns = this.gameState.turn;
+    const rivalName = this.isMultiplayer ? (this.opponent.name || 'Jugador en red') : 'Computadora (IA)';
+    await this.authService.saveMatchHistory(rivalName, resultStr, turns);
   }
 
   calculateBattle(attacker: any, defender: any, attackerPlayer: any, defenderPlayer: any, defenderIndex: number) {

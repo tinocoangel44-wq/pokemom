@@ -638,8 +638,12 @@ export class GameBoardComponent implements OnChanges, OnInit, OnDestroy {
           }
           
           if (data.gameOver) {
+              const wasAlreadyOver = this.gameState.gameOver;
               this.gameState.gameOver = data.gameOver;
               this.gameState.winner = data.winner;
+              if (!wasAlreadyOver) {
+                 this.onAction.emit({ actionType: 'gameEndedFromNetwork', payload: null });
+              }
           }
           
           this.evaluarEstadoJuego();
@@ -792,6 +796,8 @@ export class GameBoardComponent implements OnChanges, OnInit, OnDestroy {
         return;
     }
 
+    const wasAlreadyOver = this.gameState.gameOver;
+
     if (this.player.lifePoints <= 0) {
         this.player.lifePoints = 0;
         this.isGameOver = true;
@@ -802,6 +808,10 @@ export class GameBoardComponent implements OnChanges, OnInit, OnDestroy {
         this.isGameOver = true;
         this.gameState.gameOver = true;
         this.gameState.winner = this.currentPlayerId;
+    }
+
+    if (this.gameState.gameOver && !wasAlreadyOver) {
+        this.onAction.emit({ actionType: 'gameEndedFromNetwork', payload: null });
     }
   }
 
