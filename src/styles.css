@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.bg-pokeball-pattern {
+  background-color: #f1f5f9;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10A40 40 0 1 0 50 90A40 40 0 1 0 50 10ZM50 15A35 35 0 1 1 50 85A35 35 0 1 1 50 15ZM15.5 47H84.5V53H15.5V47ZM50 40A10 10 0 1 1 50 60A10 10 0 1 1 50 40ZM50 45A5 5 0 1 0 50 55A5 5 0 1 0 50 45Z' fill='%2394a3b8' fill-opacity='0.25'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
