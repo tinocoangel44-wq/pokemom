@@ -55,7 +55,7 @@ import { Subscription } from 'rxjs';
               <div class="w-full h-1/2 bg-red-600 absolute top-0 left-0 border-b-2 border-slate-900"></div>
               <div class="w-2 h-2 bg-white rounded-full border-2 border-slate-900 z-10 relative"></div>
             </div>
-            <span class="truncate leading-none uppercase drop-shadow-md">PokéCard Web</span>
+            <span class="truncate leading-none uppercase drop-shadow-md">PokeCard YU-Duels</span>
           </div>
 
           <!-- Usuario y Logout -->
