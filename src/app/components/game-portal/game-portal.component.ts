@@ -78,7 +78,7 @@ import { Subscription } from 'rxjs';
           <!-- Título Estilizado -->
           <div class="text-center animate-zoomIn w-full">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 uppercase tracking-widest text-center drop-shadow-md bg-white px-4 py-3 rounded-full border-4 border-slate-900 shadow-[6px_6px_0_0_#0f172a]">
-              POKÉMON TCG: EVOLUTION
+              PokeCard YU-Duels
             </h2>
           </div>
           

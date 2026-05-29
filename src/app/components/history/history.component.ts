@@ -60,26 +60,31 @@ export class HistoryComponent implements OnInit {
 
   constructor(private auth: SupabaseAuthService) {}
 
-  async ngOnInit() {
-    try {
-      const user = this.auth.getCurrentUser();
-      if (!user) return;
-      
-      const { data, error } = await this.auth.supabase
-        .from('match_history')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('fecha', { ascending: false });
-        
-      if (error && error.code !== '42P01') {
-        console.error('Error fetching history', error);
-      } else if (data) {
-        this.history = data;
+  ngOnInit() {
+    this.auth.currentUser$.subscribe(async (user) => {
+      if (!user) {
+        this.isLoading = false;
+        return;
       }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      this.isLoading = false;
-    }
+      
+      this.isLoading = true;
+      try {
+        const { data, error } = await this.auth.supabase
+          .from('match_history')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('fecha', { ascending: false });
+          
+        if (error && error.code !== '42P01') {
+          console.error('Error fetching history', error);
+        } else if (data) {
+          this.history = data;
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.isLoading = false;
+      }
+    });
   }
 }
