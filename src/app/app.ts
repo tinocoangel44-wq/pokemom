@@ -847,9 +847,9 @@ export class App implements OnInit, OnDestroy {
 
     if (defender.hp_points <= 0) {
       destroyed = true;
-      const overflowDamage = Math.abs(defender.hp_points);
-      defenderPlayer.lifePoints -= overflowDamage;
-      log(`¡${defender.name} fue derrotado! El jugador recibe ${overflowDamage} LP de daño por exceso.`);
+      const hpLost = Number(defender.base_hp) || 0;
+      defenderPlayer.lifePoints -= hpLost;
+      log(`¡${defender.name} fue derrotado! El jugador pierde ${hpLost} LP.`);
     }
 
     // Lógica de FLIP (Volteo) post-cálculo
